@@ -1,9 +1,11 @@
 Name: YOUR NAME HERE
 
-| Date    |  Time  |                                     Update |
-|:--------|:------:|-------------------------------------------:|
-| April 5 | 9-10pm | I tried to write abstract, efficient code. |
-|         |        |                                            |
+| Date    |      Time      |                                                                                                                                                                                                                                                                                                                                Update |
+|:--------|:--------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| April 5 |     9-10pm     |                                                                                                                                                                                                                                                                                            I tried to write abstract, efficient code. |
+| Sep 3   | 2:15pm-3:00pm  |    I started by considering how I would find the shortest number of moves with a board of size 10 without snakes and ladders. After that, I considered how I would go through each position to find the furthest move possible. After figuring out how I would in theory, I struggled to put that into code without a board of sorts. |
+| Sep 3   | 3:10pm-3:40pm  |          I considered adding an array that held true or false to determine if there was a snake or ladder at each position I'm at. I then realized that going to the furthest point possible isn't necessarily the best way to get to the final spot. I struggled from there to figure out how I would "search" for the fastest past. |
+| Sep 4   | 9:45pm-10:30pm | I remembered someone in class considering BFS so I researched BFS and DFS from my old projects to figure out if either was usable in this case. BFS seemed to good to find a shortest path so I started to copy some of my old BFS code. I realized it may be easier to do BFS with a "board" of some sorts so I started coding that. |
 
 
 To add a new row to the table, click into a cell and then hit shift-enter.
