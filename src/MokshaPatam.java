@@ -22,91 +22,51 @@ public class MokshaPatam {
      */
     public static int fewestMoves(int boardsize, int[][] ladders, int[][] snakes)
     {
-        int moves = 0;
-        moves = (int) (boardsize/6) + 1;
-        int [][] board = new int[(int) floor(sqrt(boardsize))][(int) (boardsize/floor(sqrt(boardsize)))];
-        int counter = 0;
-        for(int rows = 0; rows < board.length; rows++)
+        int[] jumpArray = new int[boardsize+1];
+        for(int k = 1; k <= boardsize; k++)
         {
-            for(int col = 0; col < board[0].length; col++)
-            {
-                board[rows][col] = counter;
-                counter++;
-            }
+            jumpArray[k] = k;
         }
-        Queue<Integer> nextCells = new LinkedList<>();
-        int cellToAdd;
-        int currentCell = maze.getStartCell();
-        nextCells.add(currentCell);
-        // Marks the start as the first step to solving the maze with BFS
-        while(!nextCells.isEmpty())
+        int spot = 0;
+        for(int i = 0; i < ladders.length; i++)
         {
-            // Removes the first cell in the queue (FIFO)
-            currentCell = nextCells.remove();
-            int row = currentCell.getRow();
-            int col = currentCell.getCol();
-            if(maze.isValidCell(row - 1,col))
-            {
-                cellToAdd = maze.getCell(row - 1, col);
-                cellToAdd.setParent(currentCell);
-                // Sets the neighboring cell as explored to make sure we don't go back to it after visiting once
-                cellToAdd.setExplored(true);
-                nextCells.add(cellToAdd);
-            }
-            if(maze.isValidCell(row,col + 1))
-            {
-                cellToAdd = maze.getCell(row , col + 1);
-                cellToAdd.setParent(currentCell);
-                cellToAdd.setExplored(true);
-                nextCells.add(cellToAdd);
-            }
-            if(maze.isValidCell(row + 1,col))
-            {
-                cellToAdd = maze.getCell(row + 1, col);
-                cellToAdd.setParent(currentCell);
-                cellToAdd.setExplored(true);
-                nextCells.add(cellToAdd);
-            }
-            if(maze.isValidCell(row,col - 1))
-            {
-                cellToAdd = maze.getCell(row , col - 1);
-                cellToAdd.setParent(currentCell);
-                cellToAdd.setExplored(true);
-                nextCells.add(cellToAdd);
-            }
+            spot = ladders[i][0];
+            jumpArray[spot] = ladders[i][1];
         }
-        // Returns the path from start to end
-        return getSolution();
-    }
-        // import breadth first search to find the shortest path to the final square
-            // Go through each of the spots you can get to with a roll between 1 and 6
-            // Check if each of those spots has a snake, ladder, or neither
-            // Check if square has been visited already or not
-            // If not, add to queue to check
-
-        // return the shortest path
-        // if breadth first search doesn't end at the final spot, there is no solution
-        //
-
-        //
-/*        while(spot != min)
+        for(int j = 0; j < snakes.length;j++)
         {
+            spot = snakes[j][0];
+            jumpArray[spot] = snakes[j][1];
+        }
+
+        Queue<Integer> myQueue = new LinkedList<Integer>();
+        myQueue.add(1);
+        int toVisit = 0;
+        int next = 0;
+        boolean[] visited = new boolean[boardsize+1];
+        int[] count = new int[boardsize+1];
+        visited[1] = true;
+        while(!myQueue.isEmpty())
+        {
+            toVisit = myQueue.remove();
+            if(toVisit == boardsize)
+            {
+                return count[toVisit];
+            }
             for(int i = 1; i <= 6; i++)
             {
-                if(spot-i >= min && i>biggestNumber)
+                next = toVisit + i;
+                if(next <= boardsize)
                 {
-                    biggestNumber = i;
+                    if(!visited[jumpArray[next]])
+                    {
+                        visited[jumpArray[next]] = true;
+                        myQueue.add(jumpArray[next]);
+                        count[jumpArray[next]] = count[toVisit] + 1;
+                    }
                 }
             }
-            spot -= biggestNumber;
-            count++;
-        }*/
-
-        if(spot + count < 10 )
-        for(int i = boardsize; i > 0; i++)
-        {
-            for(int j = 0; j < b)
         }
-        return 0;
+        return -1;
     }
 }
